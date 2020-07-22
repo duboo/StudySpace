@@ -11,18 +11,19 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="394869152061-vjsli95a52lk4kaupp8eto96m14oiu4p.apps.googleusercontent.com">
     <script>
-        function onSignIn(googleUser) { //구글
+        function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); 
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
             console.log('Name: ' + profile.getName());
             console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); 
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
         }
     </script>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 </head>
 <body>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <a id="kakao-login-btn"></a>
+    <a id="kakao-login-btn"></a> 
     <a href="http://developers.kakao.com/logout"></a>
     <script type='text/javascript'>
       //<![CDATA[
@@ -37,6 +38,18 @@
           }
         });
       //]]>
+    </script>
+    <div id="naverIdLogin"></div>
+    <script type="text/javascript"> 
+        var naverLogin = new naver.LoginWithNaverId(
+            {
+                clientId: "_MT68czGuA_5GA_SeuHX",
+                callbackUrl: "https://study-space.netlify.app",
+                isPopup: false, /* 팝업을 통한 연동처리 여부 */
+                loginButton: {color: "green", type: 3, height: 60} /* 로그인 버튼의 타입을 지정 */
+            }
+        );
+        naverLogin.init();
     </script>
 </body>
 </html>
